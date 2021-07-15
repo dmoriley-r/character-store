@@ -1,0 +1,46 @@
+<form>
+  <ng-container ngModelGroup="character">
+    <div class="form-group">
+      <label for="name">Character Name:</label>
+      <input
+        class="form-control"
+        type="text"
+        name="name"
+        [(ngModel)]="character.name"
+      />
+    </div>
+
+    <fieldset ngModelGroup="bioSummary">
+      <legend>Bio Summary</legend>
+      <div class="form-group">
+        <label for="age">Age:</label>
+        <input
+          class="form-control"
+          type="number"
+          name="age"
+          [(ngModel)]="character.bioSummary.age"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="alignment">Alignment:</label>
+        <input
+          class="form-control"
+          type="text"
+          name="alignment"
+          [(ngModel)]="character.bioSummary.alignment"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="race">Race:</label>
+        <input
+          class="form-control"
+          type="text"
+          name="race"
+          [(ngModel)]="character.bioSummary.race"
+        />
+      </div>
+    </fieldset>
+  </ng-container>
+</form>

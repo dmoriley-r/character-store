@@ -1,0 +1,18 @@
+/* You can add global styles to this file, and also import other style files */
+body {
+  background-color: #201f1f !important;
+}
+
+fieldset {
+  padding: 0.35em 0.625em 0.75em;
+  margin: 4px 0 0 0;
+  border: 1px solid silver;
+}
+
+legend {
+  display: inline;
+  border: none;
+  float: none;
+  width: auto;
+  font-size: inherit;
+}
