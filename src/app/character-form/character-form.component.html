@@ -1,7 +1,7 @@
 <form>
   <ng-container ngModelGroup="character">
     <div class="form-group">
-      <label for="name">Character Name:</label>
+      <label class="form-label" for="name">Character Name:</label>
       <input
         class="form-control"
         type="text"
@@ -13,7 +13,7 @@
     <fieldset ngModelGroup="bioSummary">
       <legend>Bio Summary</legend>
       <div class="form-group">
-        <label for="age">Age:</label>
+        <label class="form-label" for="age">Age:</label>
         <input
           class="form-control"
           type="number"
@@ -23,7 +23,7 @@
       </div>
 
       <div class="form-group">
-        <label for="alignment">Alignment:</label>
+        <label class="form-label" for="alignment">Alignment:</label>
         <input
           class="form-control"
           type="text"
@@ -33,7 +33,7 @@
       </div>
 
       <div class="form-group">
-        <label for="race">Race:</label>
+        <label class="form-label" for="race">Race:</label>
         <input
           class="form-control"
           type="text"
@@ -41,6 +41,30 @@
           [(ngModel)]="character.bioSummary.race"
         />
       </div>
+    </fieldset>
+    <fieldset ngModelGroup="skills">
+      <legend>Character Skills</legend>
+
+      <label class="form-label" for="addSkill">Add skill:</label>
+      <input
+        #s
+        class="form-control"
+        placeholder="Dancing..."
+        type="text"
+        name="addSkill"
+        (keyup.enter)="addSkill(s)"
+      />
+      <button type="button" class="btn btn-primary" (click)="addSkill(s)">
+        Add
+      </button>
+      <!-- <div class="form-group">
+        <label for="skills">Hold shift to select multiple</label>
+        <select name="skills" class="form-control" multiple>
+          <option *ngFor="let skl of skills; let i = index" [value]="skl">
+            {{ skl }}
+          </option>
+        </select>
+      </div> -->
     </fieldset>
   </ng-container>
 </form>
