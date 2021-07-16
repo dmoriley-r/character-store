@@ -7,7 +7,6 @@ import {
   addIntoArray,
   characterFormSelector,
   isAgeValidSelector,
-  isFormValid,
   isFormValidSelector,
   isNameValidSelector,
   removeFromArray,

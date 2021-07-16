@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { assocPath, lensPath, view, path, mergeRight, clone } from 'ramda';
+import { assocPath, lensPath, view, path, mergeRight } from 'ramda';
 
 import { initialFormState } from './initialState';
 import { IForm } from '../types';
@@ -8,10 +8,7 @@ import * as arrayActions from './array.actions';
 
 const _formReducer = createReducer<IForm>(
   initialFormState,
-  // extract type from value being pushed to store for save
   on(formActions.saveForm, (state, payload) => {
-    // deep copy the state so nested properties are no longer readonly
-    // const stateClone = JSON.parse(JSON.stringify(state));
     const copy = path(payload.path, state);
     return assocPath(
       payload.path,
