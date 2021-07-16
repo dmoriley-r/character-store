@@ -1,18 +1,14 @@
 import { createSelector } from '@ngrx/store';
-import { IAppState, IForm } from '../types';
+import { IAppState, ICharacter, IForm } from '../types';
 
-const formStateSelector = (state: IAppState) => state.form;
+export const formStateSelector = (state: IAppState) => state.form;
 
 export const characterFormSelector = createSelector(
   formStateSelector,
   (form: IForm) => form.character
 );
 
-export const isFormValid = createSelector(
+export const bioSummarySelector = createSelector(
   characterFormSelector,
-  // conveted whole expression to boolean for type safe
-  (character) =>
-    Boolean(
-      character.name && character.bioSummary.age && character.skills?.length > 0
-    )
+  ({ bioSummary }: ICharacter) => bioSummary
 );

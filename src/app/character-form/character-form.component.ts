@@ -7,6 +7,7 @@ import {
   addIntoArray,
   characterFormSelector,
   isFormValid,
+  isFormValidSelector,
   removeFromArray,
   saveForm,
 } from '../store';
@@ -44,7 +45,7 @@ export class CharacterFormComponent implements OnInit, OnDestroy {
       });
 
     // selectors
-    this.isFormValid$ = this.store.select(isFormValid);
+    this.isFormValid$ = this.store.select(isFormValidSelector);
   }
 
   addSkill(input: HTMLInputElement) {
