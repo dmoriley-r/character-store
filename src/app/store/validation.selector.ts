@@ -34,10 +34,10 @@ export const isAgeValidSelector = createSelector(
 // Name selectors
 
 const maxStringLengthValidation = (value: string, max: number) =>
-  value.length < max;
+  value.length <= max;
 
 const minStringLengthValidation = (value: string, min: number) =>
-  value.length > min;
+  value.length >= min;
 
 export const isNameValidSelector = createSelector(
   characterFormSelector,

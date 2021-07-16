@@ -6,8 +6,10 @@ import { debounceTime } from 'rxjs/operators';
 import {
   addIntoArray,
   characterFormSelector,
+  isAgeValidSelector,
   isFormValid,
   isFormValidSelector,
+  isNameValidSelector,
   removeFromArray,
   saveForm,
 } from '../store';
@@ -20,6 +22,8 @@ import { IAppState, ICharacter } from '../types';
 })
 export class CharacterFormComponent implements OnInit, OnDestroy {
   isFormValid$: Observable<boolean>;
+  isNameValid$: Observable<boolean>;
+  isAgeValid$: Observable<boolean>;
 
   @ViewChild(NgForm, { static: true }) myForm: NgForm;
   public character: ICharacter;
@@ -46,6 +50,8 @@ export class CharacterFormComponent implements OnInit, OnDestroy {
 
     // selectors
     this.isFormValid$ = this.store.select(isFormValidSelector);
+    this.isNameValid$ = this.store.select(isNameValidSelector);
+    this.isAgeValid$ = this.store.select(isAgeValidSelector);
   }
 
   addSkill(input: HTMLInputElement) {
