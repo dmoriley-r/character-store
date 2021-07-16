@@ -1,3 +1,16 @@
 button {
   margin-top: 5px;
 }
+
+.skill {
+  background-color: gray;
+  border-radius: 5px;
+  border: solid 1px black;
+  color: white;
+  display: inline-block;
+  margin: 2px 4px;
+  padding: 4px 8px;
+}
+.badge {
+  cursor: pointer;
+}

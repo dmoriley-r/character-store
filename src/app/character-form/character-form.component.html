@@ -45,11 +45,10 @@
     <fieldset ngModelGroup="skills">
       <legend>Character Skills</legend>
 
-      <label class="form-label" for="addSkill">Add skill:</label>
       <input
         #s
         class="form-control"
-        placeholder="Dancing..."
+        placeholder="Add Skill: Dancing..."
         type="text"
         name="addSkill"
         (keyup.enter)="addSkill(s)"
@@ -57,14 +56,12 @@
       <button type="button" class="btn btn-primary" (click)="addSkill(s)">
         Add
       </button>
-      <!-- <div class="form-group">
-        <label for="skills">Hold shift to select multiple</label>
-        <select name="skills" class="form-control" multiple>
-          <option *ngFor="let skl of skills; let i = index" [value]="skl">
-            {{ skl }}
-          </option>
-        </select>
-      </div> -->
+      <div class="mt-3" *ngIf="character.skills">
+        <div class="skill" *ngFor="let skl of character.skills; let i = index">
+          {{ skl }}
+          <span (click)="removeSkill(i)" class="badge bg-danger">X</span>
+        </div>
+      </div>
     </fieldset>
   </ng-container>
 </form>

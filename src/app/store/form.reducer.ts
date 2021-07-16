@@ -21,6 +21,18 @@ const _formReducer = createReducer<IForm>(
       ((propValue as Array<any>) || []).concat(value),
       state
     );
+  }),
+  on(arrayActions.removeFromArray, (state, { index, path }) => {
+    const lensForProp = lensPath(path);
+    const propValue = view(lensForProp, state);
+    // check if index passed is greater than 0 and less than the last index in the array
+    if (!propValue || index < 0 || index > propValue.length - 1) {
+      return state;
+    }
+    const copy = propValue.slice();
+    copy.splice(index, 1); // delete element from copy
+
+    return assocPath(path, copy, state);
   })
 );
 

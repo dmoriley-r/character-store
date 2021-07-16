@@ -3,7 +3,7 @@ import { NgForm } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
-import { addIntoArray, saveForm } from '../store';
+import { addIntoArray, removeFromArray, saveForm } from '../store';
 import { IAppState, ICharacter } from '../types';
 
 @Component({
@@ -15,15 +15,6 @@ export class CharacterFormComponent implements OnInit, OnDestroy {
   @ViewChild(NgForm, { static: true }) myForm: NgForm;
   public character: ICharacter;
   private subscription: Subscription | undefined;
-
-  skills: string[] = [
-    'Drinking',
-    'Swords',
-    'Archery',
-    'Spells',
-    'Ironwork',
-    'Singing',
-  ];
 
   constructor(private store: Store<IAppState>) {}
 
@@ -45,10 +36,20 @@ export class CharacterFormComponent implements OnInit, OnDestroy {
   }
 
   addSkill(input: HTMLInputElement) {
+    if (input.value.length === 0) {
+      return;
+    }
+
     this.store.dispatch(
       addIntoArray({ value: input.value, path: ['character', 'skills'] })
     );
     input.value = ''; // clear input
+  }
+
+  removeSkill(index: number) {
+    this.store.dispatch(
+      removeFromArray({ index, path: ['character', 'skills'] })
+    );
   }
 
   ngOnDestroy() {
