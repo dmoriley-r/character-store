@@ -1,9 +1,15 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
-import { addIntoArray, removeFromArray, saveForm } from '../store';
+import {
+  addIntoArray,
+  characterFormSelector,
+  isFormValid,
+  removeFromArray,
+  saveForm,
+} from '../store';
 import { IAppState, ICharacter } from '../types';
 
 @Component({
@@ -12,6 +18,8 @@ import { IAppState, ICharacter } from '../types';
   styleUrls: ['./character-form.component.scss'],
 })
 export class CharacterFormComponent implements OnInit, OnDestroy {
+  isFormValid$: Observable<boolean>;
+
   @ViewChild(NgForm, { static: true }) myForm: NgForm;
   public character: ICharacter;
   private subscription: Subscription | undefined;
@@ -21,7 +29,7 @@ export class CharacterFormComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     // Subscribe to the form in state.
     this.subscription = this.store
-      .select((state) => state.form.character)
+      .select(characterFormSelector)
       .subscribe((characterFormState) => {
         this.character = { ...characterFormState };
       });
@@ -30,9 +38,13 @@ export class CharacterFormComponent implements OnInit, OnDestroy {
     this.subscription = this.myForm.valueChanges
       ?.pipe(debounceTime(0))
       .subscribe((change) => {
-        console.log(JSON.stringify(change, null, 2));
-        this.store.dispatch(saveForm(change));
+        this.store.dispatch(
+          saveForm({ path: ['character'], value: change.character })
+        );
       });
+
+    // selectors
+    this.isFormValid$ = this.store.select(isFormValid);
   }
 
   addSkill(input: HTMLInputElement) {
